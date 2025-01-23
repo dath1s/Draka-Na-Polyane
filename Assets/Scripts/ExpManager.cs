@@ -14,6 +14,9 @@ public class ExpManager : MonoBehaviour
     public Slider expSlider;
     public TMP_Text currentLevelText;
 
+    public delegate void LevelIncreased();
+    public static event LevelIncreased OnLevelIncreased;
+
 
     private void Start()
     {
@@ -44,7 +47,8 @@ public class ExpManager : MonoBehaviour
 
         if (currentExp > expToLevel)
         {
-            LevelUp();
+            for (int i = 0; i < currentExp / expToLevel; i++)
+                LevelUp();
         }
 
         UpdateUI();
@@ -55,6 +59,8 @@ public class ExpManager : MonoBehaviour
         level++;
         currentExp -= expToLevel;
         expToLevel = Mathf.RoundToInt(expToLevel * expGrowthMultiplier);
+
+        OnLevelIncreased();
     }
 
     public void UpdateUI()

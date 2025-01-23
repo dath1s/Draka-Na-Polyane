@@ -9,9 +9,26 @@ public class Player_Combat : MonoBehaviour
     public StatsUI statsUI;
     public Animator anim;
 
+    public int damageGrowthBonus = 1;
+
     public float cooldown = 1;
     private float timer;
 
+
+    private void OnEnable()
+    {
+        ExpManager.OnLevelIncreased += LevelDamageIncrease;
+    }
+
+    private void OnDisable()
+    {
+        ExpManager.OnLevelIncreased -= LevelDamageIncrease;
+    }
+
+    private void LevelDamageIncrease()
+    {
+        StatsManager.Instance.damage += damageGrowthBonus;
+    }
 
     private void Update()
     {
@@ -28,7 +45,6 @@ public class Player_Combat : MonoBehaviour
 
             timer = cooldown;
         }
-
     }
 
     public void DealDamage()
