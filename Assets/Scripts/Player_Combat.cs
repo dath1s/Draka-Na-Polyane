@@ -6,7 +6,7 @@ public class Player_Combat : MonoBehaviour
 {
     public Transform attackPoint;
     public LayerMask enemyLayer;
-
+    public StatsUI statsUI;
     public Animator anim;
 
     public float cooldown = 1;
