@@ -28,6 +28,16 @@ public class ExpManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        Enemy_Health.OnEnemyDefeated += GainExpirience;
+    }
+
+    private void OnDisable()
+    {
+        Enemy_Health.OnEnemyDefeated -= GainExpirience;
+    }
+
     public void GainExpirience(int amount)
     {
         currentExp += amount;

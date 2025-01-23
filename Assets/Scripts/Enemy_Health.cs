@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour
 {
+    public int expReward = 3;
+
+    public delegate void EnemyDefeated(int exp);
+    public static event EnemyDefeated OnEnemyDefeated;
+
     public int currentHealth;
     public int maxHealth;
+
 
     private void Start()
     {
@@ -24,6 +30,7 @@ public class Enemy_Health : MonoBehaviour
 
         else if (currentHealth <= 0)
         {
+            OnEnemyDefeated(expReward);
             Destroy(gameObject);
         }
     }
